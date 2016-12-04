@@ -1,4 +1,5 @@
 import gestor_csv as csv
+import shutil
 
 class Aluno:
 
@@ -16,10 +17,23 @@ class Aluno:
 		else:
 			self.ativo = False
 
+	def salvar_em_csv(self, nome_arquivo_csv="alunos.csv"):
+		if (self.ativo):
+			status = "Ativo"
+		else:
+			status = "Inativo"
+		if (self.uffmail is None):
+			uffmail = ""
+		else:
+			uffmail = self.uffmail
+		aluno = {"nome": self.nome, "matricula": self.matricula, "telefone": self.telefone, "email": self.email, "uffmail": uffmail, "status": status}
+		campos = ["nome", "matricula", "telefone", "email", "uffmail", "status"]
+		csv.salvar_linha(aluno, "matricula", campos, nome_arquivo_csv)
+
 	@staticmethod
 	def matricula_para_aluno(matricula, nome_arquivo_csv="alunos.csv"):
-		alunos_csv = csv.csv_para_lista(arquivo_csv)
-		for linha in leitor:
-			if (str(matricula) == linha["matricula"]):
-				return Aluno(linha["nome"], linha["matricula"], linha["telefone"], linha["email"], linha["uffmail"], linha["status"])
-		raise ValueError("Matrícula " + str(matricula) + " não encontrada")
+		try:
+			aluno_dict = csv.get_linha(matricula, "matricula", nome_arquivo_csv)
+			return Aluno(aluno_dict["nome"], aluno_dict["matricula"], aluno_dict["telefone"], aluno_dict["email"], aluno_dict["uffmail"], aluno_dict["status"])
+		except ValueError:
+			print("Matricula", matricula, "não encontrada.")
