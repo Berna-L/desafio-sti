@@ -7,7 +7,7 @@ class Comunicador_sms(Comunicador):
 		self.telefone = telefone
 
 	def enviar_mensagem(self, nome, uffmail, senha):
-		print("======SIMULAÇÃO DO SMS======")
+		print("======SIMULAÇÃO DO SMS PARA", self.telefone, "======")
 		print("Use a senha", senha, "para acessar o seu UFFMail", uffmail)
 		print("======FIM DA SIMULAÇÃO======")
 		#Envia para o número

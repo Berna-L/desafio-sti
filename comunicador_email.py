@@ -7,7 +7,7 @@ class Comunicador_email(Comunicador):
 		self.email = email
 
 	def enviar_mensagem(self, nome, uffmail, senha):
-		print("======SIMULAÇÃO DO E-MAIL======\n")
+		print("======SIMULAÇÃO DO E-MAIL PARA", self.email, "======\n")
 		print("Olá,", nome)
 		print("\nO seu UFFMail", uffmail, "foi criado com sucesso.")
 		print("Acesse http://mail.id.uff.br e use a senha a seguir para acessá-lo:\n\n", senha)
